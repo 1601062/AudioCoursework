@@ -1,0 +1,5 @@
+﻿  main.cpp
+\\StuHome\HomeDrive2$\1601062\FOURTH YEAR\Audio Programming\DigitalAudio\DigitalAudio\main.cpp(46,27): warning C4305:  'argument': truncation from 'double' to 'float'
+\\StuHome\HomeDrive2$\1601062\FOURTH YEAR\Audio Programming\DigitalAudio\DigitalAudio\main.cpp(49,26): warning C4305:  'argument': truncation from 'double' to 'float'
+\\StuHome\HomeDrive2$\1601062\FOURTH YEAR\Audio Programming\DigitalAudio\DigitalAudio\main.cpp(59,51): warning C4244:  'argument': conversion from 'sf::Int32' to 'float', possible loss of data
+  DigitalAudio.vcxproj -> \\StuHome\HomeDrive2$\1601062\FOURTH YEAR\Audio Programming\DigitalAudio\x64\Debug\DigitalAudio.exe
