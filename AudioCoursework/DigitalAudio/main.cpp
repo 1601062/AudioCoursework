@@ -15,64 +15,43 @@
 #include <SFML/Graphics.hpp>
 //
 #include "Game.h"
-#include "Audio.h"
-
-//
-using std::cerr;
-using std::vector;
-
-void die(const char *s) {
-	cerr << "Fatal: " << s << "\n";
-	cerr << "Current directory is:\n";
-	system("cd");
-	system("pause");
-	exit(1);
-}
+#include "Input.h"
 
 int main() {
-	//
-	sf::RenderWindow window(sf::VideoMode(650, 650), "Soundwave");
-	//
-	Game game(&window);
-	//
+	sf::RenderWindow window(sf::VideoMode(1300, 650), "Audio Game!");
+	Input input;
+	window.setFramerateLimit(60.0f);
+	Game game(&window, &input);
 	sf::Clock time;
-	//
-	Audio cowbell("quiet_Cowbell.wav");;
-	Audio cymbal("cra_Rock_a.wav");
-	Audio backwards_cymbal("cra_Rock_a.wav");
-	// Cowbell effects
-	cowbell.Normalize();
-	cowbell.Reverse();
-	cowbell.Delay(5, 100, 0.9);
-	// Cymbal effects
-	cymbal.Normalize();
-	cymbal.Delay(5, 0.3, 0.5);
-	// Backwards cymbal effects
-	backwards_cymbal.Normalize();
-	backwards_cymbal.Reverse();
-	backwards_cymbal.Combine(cymbal.GetSamples());
-	backwards_cymbal.Normalize();
 
-	// run the program as long as the window is open
+	// RUN THE PROGRAM AS LONG AS THE WINDOW IS OPEN
 	while (window.isOpen())
 	{
 		game.update(time.getElapsedTime().asMilliseconds());
 		game.render();
-
-		cymbal.PlayAudio();
-		//backwards_cymbal.PlayAudio();
-		//cymbal.PlayAudio();
-
 		
-	
-
 		// check all the window's events that were triggered since the last iteration of the loop
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			// "close requested" event: we close the window
-			if (event.type == sf::Event::Closed)
+			switch (event.type)
+			{
+			case sf::Event::Closed:
 				window.close();
+				break;
+			case sf::Event::Resized:
+				window.setView(sf::View(sf::FloatRect(0, 0, event.size.width, event.size.height)));
+				break;
+			case sf::Event::KeyPressed:
+				input.setKeyDown(event.key.code);
+				break;
+			case sf::Event::KeyReleased:
+				input.setKeyUp(event.key.code);
+				break;
+			default:
+				// don't handle other events
+				break;
+			}
 		}
 	}
 
