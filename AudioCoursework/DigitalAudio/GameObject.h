@@ -1,6 +1,6 @@
+#pragma once
 #include <SFML/Graphics.hpp>
 
-#pragma once
 class GameObject :
 	public sf::Sprite
 {
@@ -11,12 +11,10 @@ public:
 	inline void setVelocity(sf::Vector2f newVelocity) { velocity = newVelocity; };
 
 	void update();
+	void HandleRotation();
 
 protected:
 
-
 private:
 	sf::Vector2f velocity = { 0, 0 };
-
 };
-

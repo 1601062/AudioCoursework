@@ -3,18 +3,18 @@
 #include <SFML/Graphics.hpp>
 
 #pragma once
-class Player :
+class Enemy :
 	public GameObject
 {
 public:
-	Player();
-	sf::Vector2f getLastVelocity();
+	Enemy();
+	Enemy(sf::Vector2f startPosition, sf::Vector2f flyingDirection, sf::Texture* enemyTexture);
 
 	virtual void update();
 
 protected:
 
 private:
-	sf::Texture playerTexture;
-	sf::Vector2f lastVelocity;
+	sf::Texture enemyTexture;
+	
 };

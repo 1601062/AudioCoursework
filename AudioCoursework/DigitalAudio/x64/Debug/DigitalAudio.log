@@ -1,2 +1,25 @@
-﻿  Player.cpp
-  DigitalAudio.vcxproj -> \\StuHome\HomeDrive2$\1601062\GitHub\AudioCoursework\AudioCoursework\x64\Debug\DigitalAudio.exe
+﻿  Game.cpp
+C:\Users\User\Desktop\Coursework\AudioCoursework\AudioCoursework\DigitalAudio\Game.cpp(35,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\User\Desktop\Coursework\AudioCoursework\AudioCoursework\DigitalAudio\Game.cpp(50,32): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\User\Desktop\Coursework\AudioCoursework\AudioCoursework\DigitalAudio\Game.cpp(75,22): warning C4305: '-=': truncation from 'double' to 'float'
+C:\Users\User\Desktop\Coursework\AudioCoursework\AudioCoursework\DigitalAudio\Game.cpp(131,76): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\User\Desktop\Coursework\AudioCoursework\AudioCoursework\DigitalAudio\Game.cpp(131,76): warning C4244:         with
+C:\Users\User\Desktop\Coursework\AudioCoursework\AudioCoursework\DigitalAudio\Game.cpp(131,76): warning C4244:         [
+C:\Users\User\Desktop\Coursework\AudioCoursework\AudioCoursework\DigitalAudio\Game.cpp(131,76): warning C4244:             T=float
+C:\Users\User\Desktop\Coursework\AudioCoursework\AudioCoursework\DigitalAudio\Game.cpp(131,76): warning C4244:         ]
+C:\Users\User\Desktop\Coursework\AudioCoursework\AudioCoursework\DigitalAudio\Game.cpp(131,56): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\User\Desktop\Coursework\AudioCoursework\AudioCoursework\DigitalAudio\Game.cpp(131,56): warning C4244:         with
+C:\Users\User\Desktop\Coursework\AudioCoursework\AudioCoursework\DigitalAudio\Game.cpp(131,56): warning C4244:         [
+C:\Users\User\Desktop\Coursework\AudioCoursework\AudioCoursework\DigitalAudio\Game.cpp(131,56): warning C4244:             T=float
+C:\Users\User\Desktop\Coursework\AudioCoursework\AudioCoursework\DigitalAudio\Game.cpp(131,56): warning C4244:         ]
+C:\Users\User\Desktop\Coursework\AudioCoursework\AudioCoursework\DigitalAudio\Game.cpp(146,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\User\Desktop\Coursework\AudioCoursework\AudioCoursework\DigitalAudio\Game.cpp(153,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\User\Desktop\Coursework\AudioCoursework\AudioCoursework\DigitalAudio\Game.cpp(191,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\User\Desktop\Coursework\AudioCoursework\AudioCoursework\DigitalAudio\Game.cpp(198,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\User\Desktop\Coursework\AudioCoursework\AudioCoursework\DigitalAudio\Game.cpp(205,41): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\User\Desktop\Coursework\AudioCoursework\AudioCoursework\DigitalAudio\Game.cpp(240,20): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\User\Desktop\Coursework\AudioCoursework\AudioCoursework\DigitalAudio\Game.cpp(243,20): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\User\Desktop\Coursework\AudioCoursework\AudioCoursework\DigitalAudio\Game.cpp(248,20): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\User\Desktop\Coursework\AudioCoursework\AudioCoursework\DigitalAudio\Game.cpp(251,20): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\User\Desktop\Coursework\AudioCoursework\AudioCoursework\DigitalAudio\Game.cpp(327): warning C4715: 'Game::WallCheck': not all control paths return a value
+  DigitalAudio.vcxproj -> C:\Users\User\Desktop\Coursework\AudioCoursework\AudioCoursework\x64\Debug\DigitalAudio.exe

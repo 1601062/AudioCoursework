@@ -1,7 +1,6 @@
 #include "Audio.h"
 
 using std::cerr;
-using std::vector;
 
 void Audio::die(const char* s) {
 	cerr << "Fatal: " << s << "\n";
@@ -11,46 +10,41 @@ void Audio::die(const char* s) {
 	exit(1);
 }
 
+Audio::Audio()
+{
+	
+}
+
 Audio::Audio(std::string str)
 {
 	// sf::SoundBuffer holds a sampled sound, using signed 16-bit samples.
 	// We can load one from a file...
-	if (!sound_buffer.loadFromFile(str)) {
+	if (!modBuffer.loadFromFile(str)) {
 		die("loading failed");
 	}
 
 	// We can read out the samples -- let's copy them into a vector
-	const sf::Int16* data = sound_buffer.getSamples();
-	vector<sf::Int16> soundsamples(data, data + sound_buffer.getSampleCount());
+	const sf::Int16* data = modBuffer.getSamples();
+	vector<sf::Int16> soundsamples(data, data + modBuffer.getSampleCount());
 	samples = soundsamples;
+
+	samplesBackup = samples;
 }
 
-void Audio::PlayAudio() {
-	// Create a new buffer from the vector.
-	sf::SoundBuffer modBuffer;
+void Audio::Play() {
+	// Populate buffer using samples vector
 	modBuffer.loadFromSamples(samples.data(), samples.size(), 1, 44100);
 
 	// sf::Sound controls playback of a sound.
-	sf::Sound sound(modBuffer);
+	sound.setBuffer(modBuffer);
 
 	// play() starts playback in a separate thread -- so it returns
 	// immediately, with the sound playing in the background.
 	sound.play();
-
-	// wait for the sound to finish playing
-	while (sound.getStatus() == sf::Sound::Playing) {
-		sf::sleep(sf::milliseconds(1));
-	}
 }
 
-void Audio::Amplify(float gain) {
-	for (int i = 0; i < samples.size(); i++) {
-		samples.at(i) *= gain;
-	}
-}
-
-void Audio::Repeat(int repeats) {
-	samples.insert(samples.end(), samples.begin(), samples.end());
+void Audio::Reset() {
+	samples = samplesBackup;
 }
 
 void Audio::Normalize() {
@@ -69,7 +63,7 @@ void Audio::Normalize() {
 
 	std::cout << highest << std::endl << lowest << std::endl;
 
-	float multiplier;
+	float multiplier = 0;
 	if (highest > -lowest) {
 		multiplier = 32767 / highest;
 	}
@@ -80,6 +74,39 @@ void Audio::Normalize() {
 	for (int i = 0; i < samples.size(); i++) {
 		samples.at(i) *= multiplier;
 	}
+}
+
+void Audio::RemoveBackground(int cutoff) {
+	for (int i = 0; i < samples.size(); i++) {
+		if (samples[i] > 0) {
+			if (samples.at(i) < cutoff) {
+				samples.at(i) = 0;
+			}
+		}
+		else {
+			if (samples.at(i) > -cutoff) {
+				samples.at(i) = 0;
+			}
+		}
+	}
+}
+
+void Audio::Amplify(float gain) {
+	for (int i = 0; i < samples.size(); i++) {
+		samples.at(i) *= gain;
+	}
+}
+
+void Audio::DistanceAttenuation(float distance, float maxDistance)
+{
+	distance /= 650;
+	distance *= 1;
+	float attenuation = 1 - distance;
+	Amplify(attenuation);
+}
+
+void Audio::Repeat(int repeats) {
+	samples.insert(samples.end(), samples.begin(), samples.end());
 }
 
 void Audio::Copy(vector<sf::Int16>& target) {
@@ -122,3 +149,4 @@ void Audio::Delay(int repeats, float seconds, float attenuation) {
 		}
 	}
 }
+

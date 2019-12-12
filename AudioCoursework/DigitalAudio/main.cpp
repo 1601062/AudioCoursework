@@ -1,9 +1,5 @@
-// CMP407 Digital Audio lab exercise
-// Adam Sampson <a.sampson@abertay.ac.uk>
-//
-// This project was set up based upon: https://www.sfml-dev.org/tutorials/2.5/start-vc.php
-// If you need to adjust the paths to the SFML library, see that guide for more information.
-// SFML is assumed to be in M:\sfml, and the project is being built in Debug x64 mode.
+// CMP407 Digital Audio Coursework Project
+// Alien Santa and the Zombie Elf UFO Apocalypse Chimney Bonanza
 
 #include <iostream>
 #include <cstdlib>
@@ -17,20 +13,47 @@
 #include "Game.h"
 #include "Input.h"
 
+using std::cerr;
+
+void die(bool win) {
+	if (win) {
+		cerr << "Congratulations. \n";
+		cerr << "You've saved alien Christmas. \n";
+		system("cd");
+		system("pause");
+		exit(1);
+	}
+	else {
+		cerr << "Congratulations. \n";
+		cerr << "You've ruined alien Christmas. \n";
+		system("cd");
+		system("pause");
+		exit(1);
+	}
+}
+
+
 int main() {
-	sf::RenderWindow window(sf::VideoMode(1300, 650), "Audio Game!");
-	Input input;
+	sf::RenderWindow window(sf::VideoMode(650, 650), "Alien Santa and the Zombie Elf UFO Apocalypse Chimney Bonanza");
 	window.setFramerateLimit(60.0f);
-	Game game(&window, &input);
+	sf::View fixed = window.getView();
+
+	Input input;
+
+	bool bGameOver = false;
+	bool bWin = false;
+
+	Game game(&window, &input, &bWin);
 	sf::Clock time;
 
-	// RUN THE PROGRAM AS LONG AS THE WINDOW IS OPEN
-	while (window.isOpen())
+	// Run the program if the window is open. 
+	while (window.isOpen() && !bGameOver)
 	{
-		game.update(time.getElapsedTime().asMilliseconds());
+		window.setView(fixed);
+		bGameOver = game.update(time.getElapsedTime().asMilliseconds());
 		game.render();
 		
-		// check all the window's events that were triggered since the last iteration of the loop
+		// Event handling:
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
@@ -48,12 +71,46 @@ int main() {
 			case sf::Event::KeyReleased:
 				input.setKeyUp(event.key.code);
 				break;
+			case sf::Event::MouseMoved:
+				input.setMousePosition(event.mouseMove.x, event.mouseMove.y);
+				break;
+			case sf::Event::MouseButtonPressed:
+				if (event.mouseButton.button == sf::Mouse::Left)
+				{
+					input.setMouseLeft(true);
+				}
+				break;
+			case sf::Event::MouseButtonReleased:
+				if (event.mouseButton.button == sf::Mouse::Left)
+				{
+					input.setMouseLeft(false);
+				}
+				break;
 			default:
-				// don't handle other events
+				// Don't handle other events. 
 				break;
 			}
 		}
-	}
 
+		
+
+		// To quit the game.
+		if (input.isKeyDown(sf::Keyboard::Escape))
+		{
+			window.close();
+			die(false);
+		}
+		// To win the game. 
+		if (bWin == true) {
+			window.close();
+			die(true);
+		}
+		// To lose the game. 
+		if (bGameOver == true) {
+			window.close();
+			die(false);
+		}
+	}
 	return 0;
 }
+
